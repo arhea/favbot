@@ -1,5 +1,5 @@
 (function() {
-  var colors, delay, favoriteTweet, log, moment, settings, startTracking, tweeper, twitter, _;
+  var colors, favoriteTweet, favoriteTweetLater, log, moment, settings, startTracking, tweeper, tweetCount, twitter, _;
 
   twitter = require('twit');
 
@@ -11,13 +11,15 @@
 
   settings = require('./settings/settings.js');
 
+  tweetCount = 0;
+
   tweeper = new twitter(settings.twitter);
 
   log = function(str) {
     return console.log('[' + 'favbot'.green + ']', str);
   };
 
-  delay = function(ms, func) {
+  favoriteTweetLater = function(ms, func) {
     return setTimeout(func, ms);
   };
 
@@ -35,13 +37,16 @@
           return log(twitterError.error);
         }
       } else {
-        return log(('Tweet by @' + tweet.user.screen_name + ' favorited!').green);
+        tweetCount++;
+        return log(('[' + tweetCount + ']').magenta + ('Tweet by @' + tweet.user.screen_name + ' favorited!').green);
       }
     });
   };
 
   startTracking = function() {
     var stream;
+    log("Starting to listen....");
+    log(settings.keywords.join(', '));
     stream = tweeper.stream('statuses/filter', {
       track: settings.keywords.join(', ')
     });
@@ -50,8 +55,8 @@
       time = _.result(settings, 'delay');
       now = moment().format('h:mm:ss a');
       log(('[' + now + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + tweet.text.yellow);
-      log(('waiting ' + time + 's to favorite...').grey);
-      return delay(time * 1000, function() {
+      log(('waiting ' + time + ' minutes to favorite...').grey);
+      return favoriteTweetLater(time * 1000 * 60, function() {
         return favoriteTweet(tweet);
       });
     });

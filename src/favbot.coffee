@@ -4,12 +4,14 @@ colors = require 'colors'
 _ = require 'lodash'
 settings = require './settings/settings.js'
 
+tweetCount = 0
+
 tweeper = new twitter settings.twitter
 
 log = (str) ->
     console.log('[' + 'favbot'.green + ']', str)
 
-delay = (ms, func) ->
+favoriteTweetLater = (ms, func) ->
     setTimeout func, ms
 
 favoriteTweet = (tweet) ->
@@ -27,9 +29,14 @@ favoriteTweet = (tweet) ->
                 log twitterError.error
 
         else
-            log ('Tweet by @' + tweet.user.screen_name + ' favorited!').green
+            tweetCount++;
+            log ('[' + tweetCount + ']').magenta + ('Tweet by @' + tweet.user.screen_name + ' favorited!').green
 
-startTracking = ->
+startTracking = () ->
+
+    log "Starting to listen...."
+    log settings.keywords.join ', '
+
     stream = tweeper.stream 'statuses/filter', { track: settings.keywords.join ', '  }
 
     stream.on 'tweet', (tweet) ->
@@ -39,8 +46,8 @@ startTracking = ->
 
         log ('[' + now + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + (tweet.text).yellow
 
-        log ('waiting ' + time + 's to favorite...').grey
+        log ('waiting ' + time + ' minutes to favorite...').grey
 
-        delay time * 1000, -> favoriteTweet tweet
+        favoriteTweetLater time * 1000 * 60, -> favoriteTweet tweet
 
 startTracking()
