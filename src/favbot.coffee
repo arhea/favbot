@@ -1,7 +1,7 @@
 twitter = require 'twit'
 moment = require 'moment'
 colors = require 'colors'
-settings = require './settings/settings.json'
+settings = require './settings/settings.js'
 
 tweeper = new twitter settings.twitter
 
@@ -29,7 +29,7 @@ favoriteTweet = (tweet) ->
             log ('Tweet by @' + tweet.user.screen_name + ' favorited!').green
 
 startTracking = ->
-    stream = tweeper.stream 'statuses/filter', { track: settings.keywords.join ', ' }
+    stream = tweeper.stream 'statuses/filter', { track: settings.keywords.join ', '  }
 
     stream.on 'tweet', (tweet) ->
 

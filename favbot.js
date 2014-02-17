@@ -7,7 +7,7 @@
 
   colors = require('colors');
 
-  settings = require('./settings/settings.json');
+  settings = require('./settings/settings.js');
 
   tweeper = new twitter(settings.twitter);
 
