@@ -8,7 +8,7 @@ Automatically favorite tweets that contain certain keywords
 First install the dependencies.
 `npm install`
 
-Copy the settings file `settings.example.json` and create a settings.json in the same location. DO NOT COMMIT THIS TO GITHUB.
+Copy the settings file `settings.example.json` and create a `settings.json` in the same location. DO NOT COMMIT THIS TO GITHUB.
 
 ```json
 {
