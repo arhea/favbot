@@ -1,11 +1,13 @@
 (function() {
-  var colors, delay, favoriteTweet, log, moment, settings, startTracking, tweeper, twitter;
+  var colors, delay, favoriteTweet, log, moment, settings, startTracking, tweeper, twitter, _;
 
   twitter = require('twit');
 
   moment = require('moment');
 
   colors = require('colors');
+
+  _ = require('lodash');
 
   settings = require('./settings/settings.js');
 
@@ -44,9 +46,12 @@
       track: settings.keywords.join(', ')
     });
     return stream.on('tweet', function(tweet) {
-      log(('[' + moment().format('h:mm:ss a') + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + tweet.text.yellow);
-      log(('waiting ' + settings.delay + 's to favorite...').grey);
-      return delay(settings.delay * 1000, function() {
+      var now, time;
+      time = _.result(settings, 'delay');
+      now = moment().format('h:mm:ss a');
+      log(('[' + now + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + tweet.text.yellow);
+      log(('waiting ' + time + 's to favorite...').grey);
+      return delay(time * 1000, function() {
         return favoriteTweet(tweet);
       });
     });

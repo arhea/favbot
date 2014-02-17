@@ -1,6 +1,7 @@
 twitter = require 'twit'
 moment = require 'moment'
 colors = require 'colors'
+_ = require 'lodash'
 settings = require './settings/settings.js'
 
 tweeper = new twitter settings.twitter
@@ -33,10 +34,13 @@ startTracking = ->
 
     stream.on 'tweet', (tweet) ->
 
-        log ('[' + moment().format('h:mm:ss a') + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + (tweet.text).yellow
+        time = _.result(settings, 'delay')
+        now = moment().format('h:mm:ss a')
 
-        log ('waiting ' + settings.delay + 's to favorite...').grey
+        log ('[' + now + ']').white + ' ' + ('@' + tweet.user.screen_name + ': ').cyan.bold + (tweet.text).yellow
 
-        delay settings.delay * 1000, -> favoriteTweet tweet
+        log ('waiting ' + time + 's to favorite...').grey
+
+        delay time * 1000, -> favoriteTweet tweet
 
 startTracking()
