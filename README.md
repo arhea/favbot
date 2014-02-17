@@ -6,6 +6,7 @@ Automatically favorite tweets that contain certain keywords
 ## Configure and Run
 
 First install the dependencies.
+
 `npm install`
 
 Copy the settings file `settings.example.json` and create a `settings.json` in the same location. DO NOT COMMIT THIS TO GITHUB.
@@ -29,7 +30,8 @@ Copy the settings file `settings.example.json` and create a `settings.json` in t
 Run the favbot
 `node favbot`
 
-## Develop
+## Development
 
-To compile changes run
+Will compile coffeescript files and will watch for changes to the code base.
+
 `gulp`
