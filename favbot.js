@@ -21,12 +21,17 @@
 
   favoriteTweet = function(tweet) {
     return tweeper.post('favorites/create', {
-      id: tweet.id
+      id: tweet.id_str
     }, function(error, tweet) {
       var twitterError;
       if (error) {
+        log('ERROR! '.red);
         twitterError = JSON.parse(error.twitterReply);
-        return log(twitterError.error.red);
+        if (twitterError.errors) {
+          return log(twitterError.errors);
+        } else {
+          return log(twitterError.error);
+        }
       } else {
         return log(('Tweet by @' + tweet.user.screen_name + ' favorited!').green);
       }

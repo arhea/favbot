@@ -12,10 +12,19 @@ delay = (ms, func) ->
     setTimeout func, ms
 
 favoriteTweet = (tweet) ->
-    tweeper.post 'favorites/create', { id: tweet.id }, (error, tweet) ->
+    tweeper.post 'favorites/create', { id: tweet.id_str }, (error, tweet) ->
+
         if error
+
+            log 'ERROR! '.red
+
             twitterError = JSON.parse error.twitterReply
-            log (twitterError.error).red
+
+            if twitterError.errors
+                log twitterError.errors
+            else
+                log twitterError.error
+
         else
             log ('Tweet by @' + tweet.user.screen_name + ' favorited!').green
 
