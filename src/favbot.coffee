@@ -1,4 +1,5 @@
 twitter = require 'twit'
+moment = require 'moment'
 settings = require './settings/settings.json'
 
 tweeper = new twitter settings.twitter
@@ -19,7 +20,7 @@ favoriteTweet = (tweet) ->
 startTracking = ->
     stream = tweeper.stream 'statuses/filter', { track: settings.keywords.join ', ' }
     stream.on 'tweet', (tweet) ->
-        log '  Found a tweet from @' + tweet.user.screen_name + " (id " + tweet.id_str + ", waiting for " + settings.delay + "s)"
+        log '[' + moment().format("h:mm:ss a") + '] Found a tweet from @' + tweet.user.screen_name + " (id " + tweet.id_str + ", waiting for " + settings.delay + "s)"
         log '  ' + tweet.text
         delay settings.delay * 1000, -> favoriteTweet tweet
 
