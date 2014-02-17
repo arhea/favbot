@@ -35,8 +35,8 @@
       track: settings.keywords.join(', ')
     });
     return stream.on('tweet', function(tweet) {
-      log('[' + moment().format("h:mm:ss a") + '] Found a tweet from @' + tweet.user.screen_name + " (id " + tweet.id_str + ", waiting for " + settings.delay + "s)");
-      log('  ' + tweet.text);
+      log('[' + moment().format('h:mm:ss a') + '] @' + tweet.user.screen_name + ': ' + tweet.text);
+      log('wating ' + settings.delay + 's to favorite...');
       return delay(settings.delay * 1000, function() {
         return favoriteTweet(tweet);
       });
