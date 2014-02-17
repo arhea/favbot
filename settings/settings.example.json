@@ -6,7 +6,7 @@
         "access_token_secret": "YOUR_ACCESS_TOKEN_SECRET"
     },
 
-    keywords: [],
+    "keywords": [],
 
-    delay: 32
+    "delay": 32
 }
