@@ -13,7 +13,6 @@ Copy the settings file `settings.example.json` and create a `settings.json` in t
 
 ```json
 {
-    {
     "twitter": {
         "consumer_key": "YOUR_CONSUMER_KEY",
         "consumer_secret": "YOUR_CONSUMER_SECRET",
