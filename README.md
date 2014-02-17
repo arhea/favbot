@@ -29,6 +29,10 @@ Copy the settings file `settings.example.json` and create a `settings.json` in t
 Run the favbot
 `node favbot`
 
+### Twitter Account Setup
+
+Go to [https://apps.twitter.com](https://apps.twitter.com) and create an application. Make sure you select Read Write permissions. Generate access tokens and API keys and place those in your `settings.json` file.
+
 ### Development
 
 Will compile coffeescript files and will watch for changes to the code base.
