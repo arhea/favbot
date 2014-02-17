@@ -3,14 +3,32 @@ favbot
 
 Automatically favorite tweets that contain certain keywords
 
-Start off by installing all the dependencies:
+## Configure and Run
 
+First install the dependencies.
 `npm install`
 
-Then add your twitter credentials to settings.js and modify the keywords you'd like to track.
-The "delay" variable defines how many seconds to wait before favoriting a tweet after it was
-created.
+Copy the settings file `settings.example.json` and create a settings.json in the same location. DO NOT COMMIT THIS TO GITHUB.
 
-After modifying settings.js, start the script by running
+```json
+{
+    "twitter": {
+        "consumer_key": "YOUR_CONSUMER_KEY",
+        "consumer_secret": "YOUR_CONSUMER_SECRET",
+        "access_token": "YOUR_ACCESS_TOKEN",
+        "access_token_secret": "YOUR_ACCESS_TOKEN_SECRET"
+    },
 
+    keywords: [],
+
+    delay: 32
+}
+```
+
+Run the favbot
 `node favbot`
+
+## Develop
+
+To compile changes run
+`gulp`
