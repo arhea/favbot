@@ -3,7 +3,7 @@ favbot
 
 Automatically favorite tweets that contain certain keywords
 
-## Configure and Run
+### Configure and Run
 
 First install the dependencies.
 
@@ -30,7 +30,7 @@ Copy the settings file `settings.example.json` and create a `settings.json` in t
 Run the favbot
 `node favbot`
 
-## Development
+### Development
 
 Will compile coffeescript files and will watch for changes to the code base.
 
